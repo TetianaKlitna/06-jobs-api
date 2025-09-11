@@ -6,11 +6,13 @@ const JobSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Please provide company name'],
       maxlength: 50,
+      trim: true,
     },
     position: {
       type: String,
       required: [true, 'Please provide position name'],
       maxlength: 100,
+      trim: true,
     },
     status: {
       type: String,
@@ -42,8 +44,8 @@ const JobSchema = new mongoose.Schema(
     },
 
     salaryRange: {
-      min: { type: Number },
-      max: { type: Number },
+      min: { type: Number, default: 80000 },
+      max: { type: Number, default: 120000 },
       currency: { type: String, default: 'USD' },
     },
 
