@@ -1,0 +1,265 @@
+{
+	"info": {
+		"_postman_id": "524c5009-aae6-407a-b617-a986e92b1112",
+		"name": "TaskManagerV2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47030216",
+		"_collection_link": "https://tetianaklitna-1686162.postman.co/workspace/Tetiana-Klitna's-Workspace~989a6dad-2b5d-4bda-80d4-4fbb409195b9/collection/47030216-524c5009-aae6-407a-b617-a986e92b1112?action=share&source=collection_link&creator=47030216"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();\r",
+							"pm.globals.set('accessToken', jsonData.token);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\": \"katty@gmail.com\", \"password\": \"Secret25%\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_PROD}}/auth/login",
+					"host": [
+						"{{URL_PROD}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();\r",
+							"pm.globals.set('accessToken', jsonData.token);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"Katty\", \"email\": \"katty@gmail.com\", \"password\":\"Secret25%\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_PROD}}/auth/register",
+					"host": [
+						"{{URL_PROD}}"
+					],
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllJobs",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL_PROD}}/jobs",
+					"host": [
+						"{{URL_PROD}}"
+					],
+					"path": [
+						"jobs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetJob",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL_PROD}}/jobs/:id",
+					"host": [
+						"{{URL_PROD}}"
+					],
+					"path": [
+						"jobs",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateJob",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company\": \"Amazon\",\r\n  \"position\": \"Backend Developer\",\r\n  \"status\": \"interview\",\r\n  \"workMode\": \"hybrid\",\r\n  \"jobType\": \"full-time\",\r\n  \"location\": \"Seattle, WA\",\r\n  \"salaryRange\": {\r\n    \"min\": 95000,\r\n    \"max\": 135000,\r\n    \"currency\": \"USD\"\r\n  },\r\n  \"description\": \"Responsible for building scalable backend services with Node.js, Express, and MongoDB. Collaborate with cross-functional teams to deliver high-performance APIs.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_PROD}}/jobs",
+					"host": [
+						"{{URL_PROD}}"
+					],
+					"path": [
+						"jobs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateJob",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"company\": \"Amazon\",\r\n  \"position\": \"Backend Developer\",\r\n  \"status\": \"interview\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_PROD}}/jobs/:id",
+					"host": [
+						"{{URL_PROD}}"
+					],
+					"path": [
+						"jobs",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteJob",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URL_PROD}}/jobs/:id",
+					"host": [
+						"{{URL_PROD}}"
+					],
+					"path": [
+						"jobs",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

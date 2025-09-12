@@ -1,12 +1,20 @@
+//security
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const cors = require('cors');
 const xss = require('xss-clean');
+//swagger
+const swaggerUi = require('swagger-ui-express');
+const YAML = require('yamljs');
+const path = require('path');
+
 require('dotenv').config();
 require('express-async-errors');
 const express = require('express');
 const app = express();
 const connectDB = require('./db/connect');
+
+const swaggerDocument = YAML.load(path.join(__dirname, './swagger.yaml'));
 
 //middleware
 const authUser = require('./middleware/authentication');
@@ -32,8 +40,13 @@ app.use(helmet());
 app.use(cors());
 app.use(xss());
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 app.get('/', (req, res) => {
-  res.send('Jobs API');
+  res.send(`
+    <h1>Jobs API</h1>
+    <p>See the <a href="/api-docs">Swagger Documentation</a></p>
+  `);
 });
 
 // routes
