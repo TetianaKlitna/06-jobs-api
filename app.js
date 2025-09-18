@@ -41,13 +41,14 @@ app.use(cors());
 app.use(xss());
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+// app.get('/', (req, res) => {
+//   res.send(`
+//     <h1>Jobs API</h1>
+//     <p>See the <a href="/api-docs">Swagger Documentation</a></p>
+//   `);
+// });
 
-app.get('/', (req, res) => {
-  res.send(`
-    <h1>Jobs API</h1>
-    <p>See the <a href="/api-docs">Swagger Documentation</a></p>
-  `);
-});
+app.use(express.static('public'));
 
 // routes
 app.use('/api/v1/auth', authRouter);
