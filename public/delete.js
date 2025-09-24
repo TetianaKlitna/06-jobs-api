@@ -1,5 +1,6 @@
 import { token } from './index.js';
 import { showJobs } from './jobs.js';
+import { ERR_MESSAGES, SUCCESS_MESSAGES } from './constants.js';
 
 export const deleteJob = async (jobId) => {
   try {
@@ -13,13 +14,13 @@ export const deleteJob = async (jobId) => {
 
     await response.json();
     if (response.status === 200) {
-      message.textContent = 'The Job is deleted';
+      message.textContent = SUCCESS_MESSAGES.RESOURCE_DELETED;
     } else {
-      message.textContent = 'The jobs entry was not found';
+      message.textContent = ERR_MESSAGES.NOT_FOUND;
     }
   } catch (err) {
     console.log(err);
-    message.textContent = 'A communications error has occurred.';
+    message.textContent = ERR_MESSAGES.COMMUNICATION;
   } finally {
     showJobs();
   }

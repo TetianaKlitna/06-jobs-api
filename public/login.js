@@ -8,6 +8,7 @@ import {
 } from './index.js';
 import { showLoginRegister } from './loginRegister.js';
 import { showJobs } from './jobs.js';
+import { ERR_MESSAGES } from './constants.js';
 
 let loginDiv = null;
 let email = null;
@@ -51,7 +52,7 @@ export const handleLogin = () => {
           }
         } catch (err) {
           console.error(err);
-          message.textContent = 'A communications error occurred.';
+          message.textContent = ERR_MESSAGES.COMMUNICATION;
         }
 
         enableInput(true);

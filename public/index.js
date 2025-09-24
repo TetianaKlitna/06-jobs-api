@@ -1,11 +1,11 @@
-let activeDiv = null;
-export const setDiv = (newDiv) => {
-  if (newDiv != activeDiv) {
-    if (activeDiv) {
-      activeDiv.style.display = 'none';
+let activeItem = null;
+export const setDiv = (newItem) => {
+  if (newItem != activeItem) {
+    if (activeItem) {
+      activeItem.style.display = 'none';
     }
-    newDiv.style.display = 'block';
-    activeDiv = newDiv;
+    newItem.style.display = 'block';
+    activeItem = newItem;
   }
 };
 

@@ -9,6 +9,7 @@ import {
 import { showLoginRegister } from './loginRegister.js';
 import { showAddEdit } from './addEdit.js';
 import { deleteJob } from './delete.js';
+import { ERR_MESSAGES } from './constants.js';
 
 let jobsDiv = null;
 let jobsTable = null;
@@ -62,9 +63,9 @@ export const showJobs = async () => {
       } else {
         for (let i = 0; i < data.jobs.length; i++) {
           let rowEntry = document.createElement('tr');
-
-          let editButton = `<td><button type="button" class="editButton" data-id=${data.jobs[i]._id}>edit</button></td>`;
-          let deleteButton = `<td><button type="button" class="deleteButton" data-id=${data.jobs[i]._id}>delete</button></td>`;
+          const { _id: jobId } = data.jobs[i];
+          let editButton = `<td><button type="button" class="editButton" data-id=${jobId}>edit</button></td>`;
+          let deleteButton = `<td><button type="button" class="deleteButton" data-id=${jobId}>delete</button></td>`;
           let rowHTML = `
             <td>${data.jobs[i].company}</td>
             <td>${data.jobs[i].position}</td>
@@ -88,7 +89,7 @@ export const showJobs = async () => {
     }
   } catch (err) {
     console.log(err);
-    message.textContent = 'A communication error occurred.';
+    message.textContent = ERR_MESSAGES.COMMUNICATION;
   }
   enableInput(true);
   setDiv(jobsDiv);

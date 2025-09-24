@@ -1,5 +1,6 @@
 import { inputEnabled, setDiv, token, message, enableInput } from './index.js';
 import { showJobs } from './jobs.js';
+import { ERR_MESSAGES, SUCCESS_MESSAGES } from './constants.js';
 
 let addEditDiv = null;
 let company = null;
@@ -69,10 +70,10 @@ export const handleAddEdit = () => {
           if (response.status === 200 || response.status === 201) {
             if (response.status === 200) {
               // a 200 is expected for a successful update
-              message.textContent = 'The job entry was updated.';
+              message.textContent = SUCCESS_MESSAGES.RESOURCE_UPDATED;
             } else {
               // a 201 is expected for a successful create
-              message.textContent = 'The job entry was created.';
+              message.textContent = SUCCESS_MESSAGES.RESOURCE_CREATED;
             }
 
             company.value = '';
@@ -92,7 +93,7 @@ export const handleAddEdit = () => {
           }
         } catch (err) {
           console.log(err);
-          message.textContent = 'A communication error occurred.';
+          message.textContent = ERR_MESSAGES.COMMUNICATION;
         }
         enableInput(true);
       } else if (e.target === editCancel) {
@@ -150,12 +151,12 @@ export const showAddEdit = async (jobId) => {
         setDiv(addEditDiv);
       } else {
         // might happen if the list has been updated since last display
-        message.textContent = 'The jobs entry was not found';
+        message.textContent = ERR_MESSAGES.NOT_FOUND;
         showJobs();
       }
     } catch (err) {
       console.log(err);
-      message.textContent = 'A communications error has occurred.';
+      message.textContent = ERR_MESSAGES.COMMUNICATION;
       showJobs();
     }
 
